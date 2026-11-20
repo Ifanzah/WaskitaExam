@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:padding="22dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pengaturan &amp; Diagnostik"
+            android:textColor="#18181B"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="18dp"
+            android:text="Ketuk item di bawah untuk mengaktifkan izin sistem."
+            android:textColor="#71717A"
+            android:textSize="12sp" />
+
+        <!-- Item 1: Kamera -->
+        <LinearLayout
+            android:id="@+id/btnPermCamera"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Akses Kamera (Scan QR)"
+                android:textColor="#18181B"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvStatusCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E4E4E7"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Periksa"
+                android:textColor="#3F3F46"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Item 2: Baterai -->
+        <LinearLayout
+            android:id="@+id/btnPermBattery"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Baterai Tidak Terbatas"
+                android:textColor="#18181B"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvStatusBattery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E4E4E7"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Periksa"
+                android:textColor="#3F3F46"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Item 3: Mode Jangan Ganggu -->
+        <LinearLayout
+            android:id="@+id/btnPermDnd"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mode Jangan Ganggu"
+                android:textColor="#18181B"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvStatusDnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E4E4E7"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Periksa"
+                android:textColor="#3F3F46"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Item 4: Tampil di Atas Aplikasi Lain -->
+        <LinearLayout
+            android:id="@+id/btnPermOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tampil di Atas Aplikasi"
+                android:textColor="#18181B"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvStatusOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#E4E4E7"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:text="Periksa"
+                android:textColor="#3F3F46"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Bagian Utilitas -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Utilitas &amp; Pemeliharaan"
+            android:textColor="#18181B"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnCheckWebView"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:text="Perbarui Android System WebView ↗"
+            android:textColor="#18181B"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnTestAudio"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:text="Tes Suara Peringatan &amp; Getar"
+            android:textColor="#18181B"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btnClearCache"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/bg_card_soft"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp"
+            android:text="Bersihkan Cache Sesi Ujian"
+            android:textColor="#18181B"
+            android:textSize="12sp" />
+
+        <!-- Kartu Tentang Aplikasi -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_soft"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tentang WaskitaExam"
+                android:textColor="#18181B"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Peramban ujian mandiri yang ringan dan fokus menjaga integritas pelaksanaan tes daring.\n\nDikembangkan oleh Fillea Room."
+                android:textColor="#52525B"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

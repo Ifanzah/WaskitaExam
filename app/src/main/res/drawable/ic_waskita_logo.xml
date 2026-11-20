@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Latar Belakang Squircle Oranye Xiaomi -->
+    <path
+        android:fillColor="#FF6900"
+        android:pathData="M24,0 L76,0 C89.25,0 100,10.75 100,24 L100,76 C100,89.25 89.25,100 76,100 L24,100 C10.75,100 0,89.25 0,76 L0,24 C0,10.75 10.75,0 24,0 Z" />
+
+    <!-- Simbol "W" Dinamis Sesuai Sketsa -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M24,33 L42,23 L46,56 L57,41 L64,47 L78,34"
+        android:strokeWidth="6.5"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Tulisan "EXAM" Geometris di Bawah -->
+    <!-- Huruf E -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M29,72 L22,72 L22,84 L29,84 M22,78 L27,78"
+        android:strokeWidth="2.4"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Huruf X -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M36,72 L44,84 M44,72 L36,84"
+        android:strokeWidth="2.4"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+
+    <!-- Huruf A -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M51,84 L55,72 L59,84 M52.5,80 L57.5,80"
+        android:strokeWidth="2.4"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <!-- Huruf M -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M66,84 L66,72 L71,79 L76,72 L76,84"
+        android:strokeWidth="2.4"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>
