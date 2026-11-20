@@ -7,6 +7,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Bitmap
+import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
@@ -18,8 +19,6 @@ import android.os.Vibrator
 import android.os.VibratorManager
 import android.view.View
 import android.view.WindowManager
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputConnection
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -64,7 +63,7 @@ class ExamActivity : AppCompatActivity() {
         // Kosongkan Clipboard saat mulai ujian
         clearSystemClipboard()
 
-        // Aktifkan Mode Jangan Ganggu (DND) jika izin tersedia
+        // Aktifkan Mode Jangan Ganggu (DND) khusus mengizinkan jalur Alarm
         setDoNotDisturb(true)
 
         webView = findViewById(R.id.examWebView)
@@ -132,6 +131,7 @@ class ExamActivity : AppCompatActivity() {
                 progressBar.visibility = if (newProgress < 100) View.VISIBLE else View.GONE
             }
 
+            // Tangkap judul asli website CBT untuk kartu riwayat di Dashboard
             override fun onReceivedTitle(view: WebView?, title: String?) {
                 super.onReceivedTitle(view, title)
                 if (!title.isNullOrBlank() && !title.startsWith("http")) {
@@ -216,11 +216,11 @@ class ExamActivity : AppCompatActivity() {
             tvWarningBanner.visibility = View.GONE
         }, 4000)
 
-        // Pelanggaran 1 & 2: Getar senyap; Pelanggaran ke-3 dst: Getar + Lonceng Angin
+        // Pelanggaran 1 & 2: Getar senyap; Pelanggaran ke-3 dst: Getar + Lonceng Angin (Alarm 50%)
         vibrateDevice(if (violationCount >= 3) 600 else 300)
 
         if (violationCount >= 3) {
-            playSoundWithAutoVolume(R.raw.bell_warning, 0.20)
+            playAlarmSoundWithAutoVolume(R.raw.bell_warning, 0.50)
         }
     }
 
@@ -231,7 +231,7 @@ class ExamActivity : AppCompatActivity() {
             .setTitle("Akhiri Ujian?")
             .setMessage("Pastikan semua jawaban sudah dikirim sebelum keluar dari ruang ujian.")
             .setPositiveButton("Ya, Keluar") { _, _ ->
-                playSoundWithAutoVolume(R.raw.bell_exit, 0.25)
+                playAlarmSoundWithAutoVolume(R.raw.bell_exit, 0.50)
                 try {
                     stopLockTask()
                 } catch (_: Exception) {
@@ -253,17 +253,31 @@ class ExamActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun playSoundWithAutoVolume(rawResId: Int, volumeRatio: Double) {
+    private fun playAlarmSoundWithAutoVolume(rawResId: Int, volumeRatio: Double) {
         try {
             val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
-            val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            val maxVol = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
             val targetVol = (maxVol * volumeRatio).toInt().coerceAtLeast(1)
-            if (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) < targetVol) {
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, targetVol, 0)
+
+            // Paksa volume jalur Alarm minimal 50%
+            if (audioManager.getStreamVolume(AudioManager.STREAM_ALARM) < targetVol) {
+                audioManager.setStreamVolume(AudioManager.STREAM_ALARM, targetVol, 0)
             }
-            val mp = MediaPlayer.create(this, rawResId)
-            mp?.setOnCompletionListener { it.release() }
-            mp?.start()
+
+            val mp = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build()
+                )
+                val afd = resources.openRawResourceFd(rawResId)
+                setDataSource(afd.fileDescriptor, afd.startOffset, afd.length)
+                afd.close()
+                prepare()
+                setOnCompletionListener { it.release() }
+                start()
+            }
         } catch (_: Exception) {
         }
     }
@@ -301,7 +315,7 @@ class ExamActivity : AppCompatActivity() {
             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             if (nm.isNotificationPolicyAccessGranted) {
                 nm.setInterruptionFilter(
-                    if (enable) NotificationManager.INTERRUPTION_FILTER_NONE
+                    if (enable) NotificationManager.INTERRUPTION_FILTER_ALARMS
                     else NotificationManager.INTERRUPTION_FILTER_ALL
                 )
             }
